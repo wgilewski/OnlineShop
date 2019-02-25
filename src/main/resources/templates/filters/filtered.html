@@ -23,7 +23,20 @@
 <div th:replace="fragments/headerUser">HEADER</div>
 
 <div class="container">
-    <div class="row">
+
+    <div th:if="${phones.size() == 0}" class="row">
+        <div class="col-xl-10 offset-xl-1">
+
+            <div align="center">
+                <h1 class="text-danger">NIE MA PASUJACYCH TELEFONOW DO TEGO PROFILU</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div th:if="${phones.size() != 0}" class="row">
         <div class="col-xl-10 offset-xl-1">
             <table class="table table-bordered">
                 <thead class="thead-light">
@@ -37,6 +50,8 @@
 
                 </thead>
                 <tbody>
+
+
                 <tr th:each="p : ${phones}">
 
                     <td>

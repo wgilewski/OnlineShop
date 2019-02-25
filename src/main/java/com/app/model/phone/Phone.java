@@ -53,4 +53,39 @@ public class Phone {
     private Set<Order> orders = new HashSet<>();
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Phone phone = (Phone) o;
+        return Objects.equals(id, phone.id) &&
+                Objects.equals(producer, phone.producer) &&
+                Objects.equals(model, phone.model) &&
+                Objects.equals(price, phone.price) &&
+                Objects.equals(available, phone.available) &&
+                Objects.equals(screenDiagonal, phone.screenDiagonal) &&
+                Objects.equals(operatingSystem, phone.operatingSystem) &&
+                Objects.equals(cameraResolution, phone.cameraResolution) &&
+                Objects.equals(internalStorage, phone.internalStorage) &&
+                Objects.equals(ram, phone.ram) &&
+                Objects.equals(dataTransmission, phone.dataTransmission) &&
+                Objects.equals(dualSim, phone.dualSim) &&
+                Objects.equals(color, phone.color) &&
+                Objects.equals(display, phone.display) &&
+                Objects.equals(batteryCapacity, phone.batteryCapacity) &&
+                Objects.equals(bluetooth, phone.bluetooth) &&
+                Objects.equals(wifi, phone.wifi) &&
+                Objects.equals(jack, phone.jack) &&
+                Objects.equals(usb, phone.usb) &&
+                Objects.equals(typeOfMemoryCard, phone.typeOfMemoryCard) &&
+                Objects.equals(filename, phone.filename) &&
+                Objects.equals(multipartFile, phone.multipartFile);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, producer, model, price, available, screenDiagonal, operatingSystem, cameraResolution, internalStorage, ram, dataTransmission, dualSim, color, display, batteryCapacity, bluetooth, wifi, jack, usb, typeOfMemoryCard, filename, multipartFile);
+    }
+
+
 }

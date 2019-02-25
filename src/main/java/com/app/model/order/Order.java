@@ -37,4 +37,35 @@ public class Order {
     private boolean approved;
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return quantity == order.quantity &&
+                approved == order.approved &&
+                Objects.equals(id, order.id) &&
+                Objects.equals(user, order.user) &&
+                Objects.equals(phone, order.phone) &&
+                Objects.equals(price, order.price) &&
+                Objects.equals(date, order.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, user, phone, price, date, quantity, approved);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", user=" + user.getId() +
+                ", phone=" + phone.getId() +
+                ", price=" + price +
+                ", date=" + date +
+                ", quantity=" + quantity +
+                ", approved=" + approved +
+                '}';
+    }
 }
