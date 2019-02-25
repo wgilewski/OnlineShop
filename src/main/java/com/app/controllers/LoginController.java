@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class MyController {
+public class LoginController {
     @GetMapping("/mainPage")
     public String mainPage() {
         return "index";
