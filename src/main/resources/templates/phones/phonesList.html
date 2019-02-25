@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
+
+    <style>
+        .table td {
+            text-align: center;
+        }
+
+        .table th {
+            text-align: center;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+
+<div th:replace="fragments/headerAdmin">HEADER</div>
+
+<div class="container">
+    <div th:if="${phones.size() == 0}" class="row">
+        <div class="col-xl-10 offset-xl-1">
+
+            <div align="center">
+                <h1 class="text-danger">NIE DODAŁES JESZCZE ZADNYCH TELEFONOW!</h1>
+
+            </div>
+
+        </div>
+    </div>
+    <div th:if="${phones.size() != 0}" class="row">
+        <div class="col-xl-10 offset-xl-1">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Producent</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Dostępność</th>
+                    <th scope="col">Akcje</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr th:each="p : ${phones}">
+
+                    <td>
+                        <img class="my-img" th:src="@{/img/phones/{name}(name=${p.filename})}" alt="Zdjecie"
+                             width="110px" height="100px"/>
+                    </td>
+                    <td th:text="${p.producer}"></td>
+                    <td th:text="${p.model}"></td>
+                    <td th:text="${p.available}"></td>
+                    <td>
+                        <div align="center">
+                            <a class="btn btn-outline-success my-button" th:href="@{/admin/details/{id}(id=${p.id})}">SZCZEGÓŁOWY
+                                OPIS</a>
+                            <a class="btn btn-outline-danger my-button"
+                               th:href="@{/admin/delete/{id}(id=${p.id})}">USUŃ</a>
+
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+<br/>
+<br/>
+<br/>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

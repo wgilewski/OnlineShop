@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css"/>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link href="../../static/css/background.css" th:href="@{/css/background.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="fragments/headerAdmin">HEADER</div>
+<div class="container">
+    <div align="center">
+        <div class="row">
+            <div class="col-xl-8 offset-xl-2">
+
+                <div align="center">
+                    <h1>Aktualizacja</h1>
+                    <br/>
+                    <br/>
+                </div>
+
+                <form th:action="@{/phoneProfile/profileUpdate}" method="post" th:object="${profile}"
+                      enctype="multipart/form-data">
+                    <input id="id" type="text" class="form-control" th:field="*{id}" hidden="hidden"/>
+                    <div class="form-group">
+                        <label class="h2" for="name">Nazwa profilu</label>
+                        <input id="name" type="text" class="form-control" th:field="*{name}"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="h2" for="maxValue">Cena maksymalna <h5>(jeśli cena nie ma znaczenia wpisz 0)</h5>
+                        </label>
+                        <input id="maxValue" type="text" class="form-control" th:field="*{maxPrice}"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="h2" for="minBatteryCapacity">Minimalna pojemność baterii</label>
+                        <input id="minBatteryCapacity" type="text" class="form-control"
+                               th:field="*{minBatteryCapacity}"/>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="h2" for="minScreenDiagonal">Przekątna ekranu </label>
+                        <select class="custom-select" id="minScreenDiagonal" th:field="*{minScreenDiagonal}">
+                            <option th:each="e : ${screenDiagonals}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="h2" for="minCameraResolution">Aparat </label>
+                        <select class="custom-select" id="minCameraResolution" th:field="*{minCameraResolution}">
+                            <option th:each="e : ${cameraResolutions}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="h2" for="minInternalStorage">Pamięć wewnętrzna </label>
+                        <select class="custom-select" id="minInternalStorage" th:field="*{minInternalStorage}">
+                            <option th:each="e : ${internalStorages}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="h2" for="minRam">Ram </label>
+                        <select class="custom-select" id="minRam" th:field="*{minRam}">
+                            <option th:each="e : ${rams}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="h2" for="dataTransmissions">Transmicja danych</label>
+                        <ul id="dataTransmissions" class="list-inline">
+                            <li th:each="h : ${dataTransmissions}" class="list-inline-item">
+                                <input type="checkbox" th:field="*{dataTransmissions}" th:value="${h}"/>
+                                <label th:text="${h}"></label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label class="h2" for="displays">Wyświetlacz</label>
+                        <ul id="displays" class="list-inline">
+                            <li th:each="h : ${displays}" class="list-inline-item">
+                                <input type="checkbox" th:field="*{displays}" th:value="${h}"/>
+                                <label th:text="${h}"></label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label class="h2" for="typesOfMemoryCards">Karta pamięci</label>
+                        <ul id="typesOfMemoryCards" class="list-inline">
+                            <li th:each="h : ${typesOfMemoryCard}" class="list-inline-item">
+                                <input type="checkbox" th:field="*{typesOfMemoryCards}" th:value="${h}"/>
+                                <label th:text="${h}"></label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="h2" for="dualSim">Daul sim</label>
+                                <ul id="dualSim" class="list-inline">
+                                    <li th:each="d : ${dualSim}" class="list-inline-item">
+                                        <input type="radio" th:field="*{dualSim}" th:value="${d}"/>
+                                        <label th:text="${d}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="h2" for="bluetooth">Bluetooth</label>
+                                <ul id="bluetooth" class="list-inline">
+                                    <li th:each="b : ${bluetooth}" class="list-inline-item">
+                                        <input type="radio" th:field="*{bluetooth}" th:value="${b}"/>
+                                        <label th:text="${b}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="h2" for="wifi">WIFI</label>
+                                <ul id="wifi" class="list-inline">
+                                    <li th:each="w : ${wifi}" class="list-inline-item">
+                                        <input type="radio" th:field="*{wifi}" th:value="${w}"/>
+                                        <label th:text="${w}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="h2" for="jack">Wejsćie Jack</label>
+                                <ul id="jack" class="list-inline">
+                                    <li th:each="j : ${jack}" class="list-inline-item">
+                                        <input type="radio" th:field="*{jack}" th:value="${j}"/>
+                                        <label th:text="${j}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="h2" for="usb">USB</label>
+                                <ul id="usb" class="list-inline">
+                                    <li th:each="u : ${usb}" class="list-inline-item">
+                                        <input type="radio" th:field="*{usb}" th:value="${u}"/>
+                                        <label th:text="${u}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div align="center">
+                        <input class="btn btn-outline-success" type="submit" value="Aktualizuj"/>
+                        <input class="btn btn-outline-danger" type="reset" value="Reset"/>
+                    </div>
+                    <br/>
+
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

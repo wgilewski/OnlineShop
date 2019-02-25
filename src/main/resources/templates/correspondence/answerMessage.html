@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>INDEX</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css"/>
+    <link href="../../static/css/background.css" th:href="@{/css/background.css}" rel="stylesheet"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/headerAdmin">HEADER</div>
+
+<div class="container">
+
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Imie</th>
+            <th scope="col">Nazwisko</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td th:text="${message.name}"></td>
+        <td th:text="${message.surname}"></td>
+        </tbody>
+    </table>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Treść wiadomości</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td th:text="${message.messageContent}"></td>
+        </tbody>
+    </table>
+
+    <form th:action="@{/admin/answerMessage}" method="post" th:object="${message}" enctype="multipart/form-data">
+        <input id="idM" name="idM" th:value="${id}" hidden="hidden"/>
+
+        <label for="replyMessage">Napisz Odpowiedz</label>
+        <input id="replyMessage" type="text" class="form-control" th:field="*{replyMessage}"
+               placeholder="Treść odpowiedzi.." style="height:170px"/>
+        <input id="email" name="email" th:value="${message.email}" hidden="hidden"/>
+        <input id="id" name="id" th:value="${message.id}" hidden="hidden"/>
+
+        <input class="btn btn-outline-success" type="submit" value="WYSLIJ"/>
+    </form>
+</div>
+
+
+<script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</body>
+</html>

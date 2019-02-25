@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
+
+    <style>
+        .table td {
+            text-align: center;
+        }
+
+        .table th {
+            text-align: center;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+
+<div th:replace="fragments/headerAdmin">HEADER</div>
+
+<div class="container">
+    <div th:if="${messages.size() == 0}" class="row">
+        <div class="col-xl-10 offset-xl-1">
+
+            <div align="center">
+                <h1 class="text-danger">NIE MASZ JESZCZE ZADNYCH WIADOMOSCI!</h1>
+
+            </div>
+
+        </div>
+    </div>
+    <div th:if="${messages.size() != 0}" class="row">
+        <div class="col-xl-10 offset-xl-1">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nazwisko</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Odpowiedź</th>
+                    <th scope="col">Operacje</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr th:each="m : ${messages}">
+
+                    <td th:text="${m.id}"></td>
+                    <td th:text="${m.surname}"></td>
+                    <td th:text="${m.email}"></td>
+                    <div th:if="${m.status != false}">
+                        <td>Wysłano</td>
+
+                    </div>
+                    <div th:if="${m.status == false}">
+                        <td>Nie wysłano</td>
+
+                    </div>
+                    <td>
+                        <div align="center">
+
+                            <a class="btn btn-outline-danger my-button"
+                               th:href="@{/admin/deleteMessage/{id}(id=${m.id})}">Usuń</a>
+                            <row th:if="${m.status == false}">
+                                <a class="btn btn-outline-success my-button"
+                                   th:href="@{/admin/replyMessage/{id}(id=${m.id})}">Odpowiedz</a>
+                            </row>
+                            <row th:if="${m.status != false}">
+                                <a class="btn btn-outline-success my-button"
+                                   th:href="@{/admin/message/{id}(id=${m.id})}">Sprawdź</a>
+                            </row>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

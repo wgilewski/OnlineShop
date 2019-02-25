@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css"/>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link href="../../static/css/background.css" th:href="@{/css/background.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="fragments/headerAdmin">HEADER</div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-xl-8 offset-xl-2">
+
+            <div align="center">
+                <h1>AKTUALIZACJA DANYCH TELEFONU</h1>
+
+                <br/>
+                <br/>
+
+                <form th:action="@{/admin/phoneUpdate}" method="post" th:object="${phone}"
+                      enctype="multipart/form-data">
+                    <input id="id" type="text" class="form-control" th:field="*{id}" hidden="hidden"/>
+
+                    <div class="form-group">
+                        <label class="h2" for="producer">Producent</label>
+                        <input id="producer" type="text" class="form-control" th:field="*{producer}"/>
+                    </div>
+                    <p class="text-danger" th:if="${errors.containsKey('producer')}"
+                       th:text="${errors.get('producer')}"></p>
+                    <div class="form-group">
+                        <label class="h2" for="model">Model</label>
+                        <input id="model" type="text" class="form-control" th:field="*{model}"/>
+                    </div>
+                    <p class="text-danger" th:if="${errors.containsKey('model')}" th:text="${errors.get('model')}"></p>
+                    <div class="form-group">
+                        <label class="h2" for="price">Cena</label>
+                        <input id="price" type="text" class="form-control" th:field="*{price}"/>
+                    </div>
+                    <p class="text-danger" th:if="${errors.containsKey('price')}" th:text="${errors.get('price')}"></p>
+
+                    <div class="form-group">
+                        <label class="h2" for="available">Dostępność</label>
+                        <input id="available" type="text" class="form-control" th:field="*{available}"/>
+                    </div>
+                    <p class="text-danger" th:if="${errors.containsKey('available')}"
+                       th:text="${errors.get('available')}"></p>
+
+                    <div class="form-group">
+                        <label class="h2" for="color">Kolor</label>
+                        <input id="color" type="text" class="form-control" th:field="*{color}"/>
+                    </div>
+                    <p class="text-danger" th:if="${errors.containsKey('color')}" th:text="${errors.get('color')}"></p>
+                    <div class="form-group">
+                        <label class="h2" for="batteryCapacity">Pojemność baterii</label>
+                        <input id="batteryCapacity" type="text" class="form-control" th:field="*{batteryCapacity}"/>
+                    </div>
+                    <p class="text-danger" th:if="${errors.containsKey('batteryCapacity')}"
+                       th:text="${errors.get('batteryCapacity')}"></p>
+                    <div class="form-group">
+                        <label class="h2" for="screenDiagonal">Przekątna ekranu </label>
+                        <select class="custom-select" id="screenDiagonal" th:field="*{screenDiagonal}">
+                            <option th:each="e : ${screenDiagonals}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="h2" for="operatingSystem">System operacyjny </label>
+                        <select class="custom-select" id="operatingSystem" th:field="*{operatingSystem}">
+                            <option th:each="e : ${operatingSystems}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="h2" for="cameraResolution">Aparat </label>
+                        <select class="custom-select" id="cameraResolution" th:field="*{cameraResolution}">
+                            <option th:each="e : ${cameraResolutions}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="h2" for="internalStorage">Pamięć wewnętrzna </label>
+                        <select class="custom-select" id="internalStorage" th:field="*{internalStorage}">
+                            <option th:each="e : ${internalStorages}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="h2" for="ram">Ram </label>
+                        <select class="custom-select" id="ram" th:field="*{ram}">
+                            <option th:each="e : ${rams}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="h2" for="dataTransmission">Transmisja danych </label>
+                        <select class="custom-select" id="dataTransmission" th:field="*{dataTransmission}">
+                            <option th:each="e : ${dataTransmissions}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="h2" for="display">Wyświetlacz </label>
+                        <select class="custom-select" id="display" th:field="*{display}">
+                            <option th:each="e : ${displays}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="h2" for="typeOfMemoryCard">Rodzaj karty pamięci </label>
+                        <select class="custom-select" id="typeOfMemoryCard" th:field="*{typeOfMemoryCard}">
+                            <option th:each="e : ${typeOfMemoryCards}" th:value="${e}" th:text="${e}"></option>
+                        </select>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="h2" for="dualSim">Daul sim</label>
+                                <ul id="dualSim" class="list-inline">
+                                    <li th:each="d : ${dualSimb}" class="list-inline-item">
+                                        <input type="radio" th:field="*{dualSim}" th:value="${d}"/>
+                                        <label th:text="${d}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="h2" for="bluetooth">Bluetooth</label>
+                                <ul id="bluetooth" class="list-inline">
+                                    <li th:each="b : ${bluetoothb}" class="list-inline-item">
+                                        <input type="radio" th:field="*{bluetooth}" th:value="${b}"/>
+                                        <label th:text="${b}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="h2" for="wifi">WIFI</label>
+                                <ul id="wifi" class="list-inline">
+                                    <li th:each="w : ${wifib}" class="list-inline-item">
+                                        <input type="radio" th:field="*{wifi}" th:value="${w}"/>
+                                        <label th:text="${w}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="h2" for="jack">Wejsćie Jack</label>
+                                <ul id="jack" class="list-inline">
+                                    <li th:each="j : ${jackb}" class="list-inline-item">
+                                        <input type="radio" th:field="*{jack}" th:value="${j}"/>
+                                        <label th:text="${j}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="h2" for="usb">USB</label>
+                                <ul id="usb" class="list-inline">
+                                    <li th:each="u : ${usbb}" class="list-inline-item">
+                                        <input type="radio" th:field="*{usb}" th:value="${u}"/>
+                                        <label th:text="${u}"></label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="h2 text-black" for="multipartFile">Wybierz zdjęcie:</label>
+                        <input id="multipartFile" type="file" class="form-control" th:field="*{multipartFile}"/>
+                    </div>
+                    <div align="center">
+                        <input class="btn btn-outline-success" type="submit" value="AKTUALIZUJ"/>
+                        <input class="btn btn-outline-danger" type="reset" value="RESET"/>
+                    </div>
+                    <br/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="../static/css/googleMap.css.css" th:href="@{/css/footer.css}" rel="stylesheet"/>
+    <link href="../static/css/googleMap.css.css" th:href="@{/css/tableAlign.css}" rel="stylesheet"/>
+
+
+    <script>
+        function orderApprovedInfo() {
+            alert("Dziękujemy za złożenie zamówienia!");
+        }
+
+    </script>
+
+</head>
+<body>
+
+<div th:replace="fragments/headerUser">HEADER</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-xl-12 offset-xl">
+
+            <h2>Dane osobowe</h2>
+
+            <table class="table table-bordered">
+
+                <thead class="thead-light">
+                <th scope="col">Imię</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Email</th>
+                </thead>
+
+                <tbody>
+                <tr th:each="u : ${user}">
+                    <td th:text="${u.Name}"></td>
+                    <td th:text="${u.Surname}"></td>
+                    <td th:text="${u.Email}"></td>
+                </tr>
+                </tbody>
+
+            </table>
+
+            <br/>
+            <div th:if="${address != null}">
+                <h2>Dane wysyłkowe/<a th:href="@{/user/contactDetails}">Aktualizuj</a></h2>
+            </div>
+
+            <div th:if="${address == null}">
+                <h2>Dane wysyłkowe/<a th:href="@{/user/contactDetails}">Dodaj</a></h2>
+            </div>
+            <table class="table table-bordered">
+
+                <thead class="thead-light">
+                <th scope="col">Kraj</th>
+                <th scope="col">Miasto</th>
+                <th scope="col">Kod pocztowy</th>
+                </thead>
+
+                <tbody>
+                <tr th:each="a : ${address}">
+                    <td th:text="${a.Country}"></td>
+                    <td th:text="${a.Town}"></td>
+                    <td th:text="${a.ZipCode}"></td>
+                </tr>
+                </tbody>
+
+                <thead class="thead-light">
+                <th scope="col">Ulica</th>
+                <th scope="col">Numer domu</th>
+                <th scope="col">Numer telefonu</th>
+                </thead>
+
+                <tbody>
+                <tr th:each="a : ${address}">
+                    <td th:text="${a.Street}"></td>
+                    <td th:text="${a.HouseNumber}"></td>
+                    <td th:text="${a.PhoneNumber}"></td>
+                </tr>
+                </tbody>
+
+            </table>
+
+            <br/>
+
+            <h2>Produkty</h2>
+
+            <table class="table table-bordered">
+
+                <thead class="thead-light">
+                <th scope="col">Producent</th>
+                <th scope="col">Model</th>
+                <th scope="col">Kolor</th>
+                <th scope="col">Ilość</th>
+                <th scope="col">Cena</th>
+                </thead>
+
+                <tbody>
+                <tr th:each="o : ${orders}">
+
+                    <td th:text="${o.phone.producer}"></td>
+                    <td th:text="${o.phone.model}"></td>
+                    <td th:text="${o.phone.color}"></td>
+                    <td th:text="${o.quantity}"></td>
+                    <td th:text="${o.price} + zł"></td>
+                </tr>
+                </tbody>
+
+            </table>
+
+
+            <div align="right">
+                <th>DO ZAPŁATY :
+                <th th:text="${price} + zł"></th>
+                </th>
+            </div>
+            <br/>
+            <div align="center">
+                <div th:if="${address != null}">
+                    <a class="btn btn-outline-success" onclick="orderApprovedInfo()" th:href="@{/order/confirmOrder}"
+                       role="button">Potwierdź zamówienie</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <div class="footer-main-div">
+        <div class="footer-social-icons">
+            <ul>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com"><i
+                        class="fa fa-facebook"></i></a></li>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.twitter.com"><i
+                        class="fa fa-twitter"></i></a></li>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com"><i
+                        class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        <div class="footer-menu-one">
+            <ul>
+                <li><a href="#">O nas</a></li>
+                <li><a href="/contact">Kontakt</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="/js/phones/phonesList.js"></script>
+</body>
+</html>

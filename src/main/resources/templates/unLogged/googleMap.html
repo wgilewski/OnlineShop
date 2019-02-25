@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css"/>
+    <link href="../static/css/googleMap.css.css" th:href="@{/css/footer.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+    <link href="../static/css/googleMap.css.css" th:href="@{/css/googleMap.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div th:replace="fragments/header">HEADER</div>
+
+
+<div class="container">
+    <div style="text-align:center">
+        <h2>Skontaktuj Się z Nami</h2>
+        <p>Odwiedź sklep stacjonarny, albo zostaw wiadomość</p>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div id="map" style="width:100%;height:500px"></div>
+        </div>
+        <div class="column">
+
+            <form th:action="@{/contact}" method="post" th:object="${message}" enctype="multipart/form-data"
+                  action="/action_page.php">
+
+                <label for="name">Wpisz Imię</label>
+                <input id="name" type="text" name="name" class="form-control" th:field="*{name}" placeholder="Imię.."
+                       required="required"/>
+                <p class="text-danger" th:if="${errors.containsKey('name')}" th:text="${errors.get('name')}"></p>
+
+                <label for="surname">Wpisz Nazwisko</label>
+                <input id="surname" type="text" name="surname" class="form-control" th:field="*{surname}"
+                       placeholder="Nazwisko.." required="required"/>
+                <p class="text-danger" th:if="${errors.containsKey('surname')}" th:text="${errors.get('surname')}"></p>
+
+
+                <label for="email">Wpisz Email</label>
+                <input id="email" type="text" name="email" class="form-control" th:field="*{email}"
+                       placeholder="Email.." required="required"/>
+                <p class="text-danger" th:if="${errors.containsKey('email')}" th:text="${errors.get('email')}"></p>
+
+
+                <label for="message">Napisz Pytanie</label>
+                <input id="message" type="text" name="message" class="form-control" th:field="*{messageContent}"
+                       placeholder="Treść zapytania.." style="height:170px" required="required"/>
+                <br/>
+                <input class="btn btn-outline-success" type="submit" value="Wyślij"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    <div class="footer-main-div">
+        <div class="footer-social-icons">
+            <ul>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com"><i
+                        class="fa fa-facebook"></i></a></li>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.twitter.com"><i
+                        class="fa fa-twitter"></i></a></li>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com"><i
+                        class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        <div class="footer-menu-one">
+            <ul>
+                <li><a href="#">O nas</a></li>
+                <li><a href="/contact">Kontakt</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function myMap() {
+        var myCenter = new google.maps.LatLng(51.508742, -0.120850);
+        var mapCanvas = document.getElementById("map");
+        var mapOptions = {center: myCenter, zoom: 12};
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        var marker = new google.maps.Marker({position: myCenter});
+        marker.setMap(map);
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&amp;callback=myMap"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

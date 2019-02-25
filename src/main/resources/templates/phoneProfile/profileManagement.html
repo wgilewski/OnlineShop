@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.0/css/bootstrap.min.css"/>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+
+
+    <style>
+        .table td {
+            text-align: center;
+        }
+
+        .table th {
+            text-align: center;
+        }
+    </style>
+
+
+</head>
+<body>
+<div th:replace="fragments/headerAdmin">HEADER</div>
+<div class="container">
+    <div th:if="${profiles.size() == 0}" class="row">
+        <div class="col-xl-10 offset-xl-1">
+            <a class="btn btn-outline-info" th:href="@{/phoneProfile/newProfile}">NOWY PROFIL</a>
+            <div align="center">
+                <h1 class="text-danger">NIE DODALES JESZCZE ZADNYCH PROFILI!</h1>
+
+            </div>
+
+        </div>
+    </div>
+    <div th:if="${profiles.size() != 0}" class="row">
+        <div class="col-xl-10 offset-xl-1">
+
+
+            <a class="btn btn-outline-info" th:href="@{/phoneProfile/newProfile}">NOWY PROFIL</a>
+            <table class="table table-bordered">
+                <thead class="thead-light">
+
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nazwa profilu</th>
+                    <th scope="col">Opcje</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr th:each="p : ${profiles}">
+
+
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.name}"></td>
+                    <td>
+                        <div align="center">
+                            <a class="btn btn-outline-success my-button"
+                               th:href="@{/phoneProfile/profileDetails/{id}(id=${p.id})}">SZCZEGÓŁOWY OPIS</a>
+                            <a class="btn btn-outline-danger my-button"
+                               th:href="@{/phoneProfile/deleteProfile/{id}(id=${p.id})}">USUŃ</a>
+
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+</body>
+</html>

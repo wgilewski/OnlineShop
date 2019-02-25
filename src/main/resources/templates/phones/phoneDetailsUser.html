@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="../static/css/googleMap.css.css" th:href="@{/css/footer.css}" rel="stylesheet"/>
+
+    <style>
+        .table td {
+            text-align: center;
+        }
+
+        .table th {
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+<div th:replace="fragments/headerUser">HEADER</div>
+
+
+<div class="container">
+    <div class="row">
+
+
+        <div class="col-lg-1">
+            <div align="left">
+                <img class="my-img" th:src="@{/img/phones/{name}(name=${phone.filename})}" alt="Zdjecie" width="300px"
+                     height="300px"/>
+
+            </div>
+        </div>
+        <div class="col-lg-3">
+        </div>
+
+        <div class="col-lg-8">
+
+            <table class="table table-bordered">
+
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Producent</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Kolor</th>
+                    <th scope="col">Cena</th>
+                    <th scope="col">Pamięć ram</th>
+                    <th scope="col">Przekątna ekranu</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <td th:text="${phone.producer}"></td>
+                <td th:text="${phone.model}"></td>
+                <td th:text="${phone.color}"></td>
+                <td th:text="${phone.price} + zł"></td>
+                <td th:text="${phone.ram}"></td>
+                <td th:text="${phone.screenDiagonal}"></td>
+                </tbody>
+
+
+            </table>
+
+
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">System operacyjny</th>
+                    <th scope="col">Rozdzielczość aparatu</th>
+                    <th scope="col">Pamięć wewnętrzna</th>
+                    <th scope="col">Transmisja danych</th>
+                    <th scope="col">Wyświetlacz</th>
+                    <th scope="col">Pojemność baterii</th>
+                </tr>
+
+                </thead>
+
+
+                <tbody>
+                <td th:text="${phone.operatingSystem}"></td>
+                <td th:text="${phone.cameraResolution}"></td>
+                <td th:text="${phone.internalStorage}"></td>
+                <td th:text="${phone.dataTransmission}"></td>
+                <td th:text="${phone.display}"></td>
+                <td th:text="${phone.batteryCapacity} + mAh"></td>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Typ karty pamięci</th>
+                    <th scope="col">DualSim</th>
+                    <th scope="col">Wifi</th>
+                    <th scope="col">Wejście Słuchawkowe</th>
+                    <th scope="col">USB</th>
+                    <th scope="col">Bluetooth</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <td th:text="${phone.typeOfMemoryCard}"></td>
+                <td th:text="${phone.dualSim}"></td>
+                <td th:text="${phone.wifi}"></td>
+                <td th:text="${phone.jack}"></td>
+                <td th:text="${phone.usb}"></td>
+                <td th:text="${phone.bluetooth}"></td>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="footer">
+    <div class="footer-main-div">
+        <div class="footer-social-icons">
+            <ul>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com"><i
+                        class="fa fa-facebook"></i></a></li>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.twitter.com"><i
+                        class="fa fa-twitter"></i></a></li>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com"><i
+                        class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        <div class="footer-menu-one">
+            <ul>
+                <li><a href="#">O nas</a></li>
+                <li><a href="/contact">Kontakt</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

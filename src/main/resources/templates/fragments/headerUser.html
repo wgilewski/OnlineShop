@@ -1,0 +1,61 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+    <a class="navbar-brand" href="/">
+        <img src="/img/logo.png" idth="30" height="30"/>
+        AllPhones
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+
+        </ul>
+        <div class="btn-group">
+
+
+            <div class="btn-group dropdown">
+                <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    Filtrowanie
+                </button>
+                <div class="dropdown-menu">
+                    <div align="center">
+                        <a class="dropdown-item" th:href="@{/user/groupFilter}">Przeznaczenie</a>
+                        <a class="dropdown-item" href="#">Zaawansowane</a>
+                    </div>
+                </div>
+            </div>
+            <a th:href="@{/user/selectAll}" class="btn btn-outline-info" role="button">Telefony</a>
+            <a th:href="@{/order/shoppingCart}" class="btn btn-outline-info" role="button">Koszyk</a>
+            <div class="btn-group dropdown">
+                <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    Moje konto
+                </button>
+                <div class="dropdown-menu">
+                    <div align="center">
+                        <a class="dropdown-item" th:href="@{/user/contactDetails}">Dane kontaktowe</a>
+                        <a class="dropdown-item" th:href="@{/order/orderHistory}">Historia zakupów</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="btn-group">
+            <form sec:authorize="isAuthenticated()" th:action="@{/app-logout}" method="post"
+                  class="form-inline my-2 my-lg-0">
+                <input class="btn btn-outline-danger" type="submit" value="Wyloguj"/>
+            </form>
+        </div>
+    </div>
+</nav>
+<hr/>
+<div class="my-5"></div>
+</html>
