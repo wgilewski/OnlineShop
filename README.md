@@ -1,10 +1,12 @@
-Online shop application
+Online shop application with phones.
+
 
 Functionalities available to unlogged user :
 
-- User eegistration(application will send activation link to the provided email without which the account won't be activated). 
+- User registration(application will send activation link to the provided email without which the account won't be activated). 
 - User login.
-- Sending questions which are stored on the admin's side.
+- Sending questions which are stored on the admin's account.
+- Links to social media accounts
 
 
 
@@ -23,6 +25,7 @@ Functionalities available to logged user :
 - Adding and updating contact details.
 - Searching for phones which match criterias from phones profiles created by admin.
 - Shopping history.
+
 
 
 
