@@ -30,5 +30,5 @@ Functionalities available to logged user :
 
 
 To do in the future : 
-- Comparing selected phones. (Angular)
+- Comparing selected phones.
 - Advanced filtering and searching for phones.
