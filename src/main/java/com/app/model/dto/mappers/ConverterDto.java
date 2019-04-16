@@ -1,11 +1,7 @@
 package com.app.model.dto.mappers;
 
-import com.app.model.dto.PhoneDto;
 import com.app.model.dto.UserDto;
-import com.app.model.phone.Phone;
-import com.app.model.user.Role;
 import com.app.model.user.User;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -37,7 +33,7 @@ public class ConverterDto {
     }
 
 
-    public Phone fromPhoneDtoToPhone(PhoneDto phoneDto) {
+   /* public Phone fromPhoneDtoToPhone(PhoneDto phoneDto) {
         return Phone.builder()
                 .id(phoneDto.getId())
                 .hide(phoneDto.getHide())
@@ -91,5 +87,5 @@ public class ConverterDto {
                 .multipartFile(phone.getMultipartFile())
                 .filename(phone.getFilename())
                 .build();
-    }
+    }*/
 }

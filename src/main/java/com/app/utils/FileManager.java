@@ -1,7 +1,7 @@
 package com.app.utils;
 
 import com.app.exceptions.MyException;
-import com.app.model.dto.PhoneDto;
+import com.app.model.phone.Phone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,12 +19,12 @@ public class FileManager {
 
     private Logger logger = LoggerFactory.getLogger(FileManager.class);
 
-    private String createFilename(PhoneDto phoneDto) {
+    private String createFilename(Phone phone) {
         try {
-            final String filename = phoneDto.getProducer() + "_" + phoneDto.getModel() + "_" + phoneDto.getColor();
+            final String filename = phone.getProducer() + "_" + phone.getModel() + "_" + phone.getColor();
             logger.info("FILENAME CREATED");
 
-            String originalFilename = phoneDto.getMultipartFile().getOriginalFilename();
+            String originalFilename = phone.getMultipartFile().getOriginalFilename();
             String[] arr = originalFilename.split("\\.");
             String extension = arr[arr.length - 1];
             logger.info("EXTENSION GOT");
@@ -36,7 +36,7 @@ public class FileManager {
         }
     }
 
-    public String addFile(PhoneDto phoneDto) {
+    public String addFile(Phone phoneDto) {
         try {
             MultipartFile file = phoneDto.getMultipartFile();
             logger.info("FILE GOT FROM MULTIPART");

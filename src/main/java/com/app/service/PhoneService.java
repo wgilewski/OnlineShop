@@ -1,13 +1,11 @@
 package com.app.service;
 
-import com.app.model.dto.PhoneDto;
 import com.app.model.dto.mappers.ConverterDto;
 import com.app.model.phone.Phone;
 import com.app.repository.PhoneRepository;
 import com.app.utils.FileManager;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
 import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,10 +24,9 @@ public class PhoneService {
         this.fileManager = fileManager;
     }
 
-    public void addPhone(PhoneDto phoneDto) {
-        String filename = fileManager.addFile(phoneDto);
-        phoneDto.setFilename(filename);
-        Phone phone = converterDto.fromPhoneDtoToPhone(phoneDto);
+    public void addPhone(Phone phone) {
+        String filename = fileManager.addFile(phone);
+        phone.setFilename(filename);
 
         phone.setProducer(phone.getProducer().toUpperCase());
         phone.setModel(phone.getModel().toUpperCase());
@@ -39,11 +36,10 @@ public class PhoneService {
         phoneRepository.save(phone);
     }
 
-    public void updatePhone(PhoneDto phoneDto) {
-        deleteFIle(phoneDto.getId());
-        String filename = fileManager.addFile(phoneDto);
-        phoneDto.setFilename(filename);
-        Phone phone = converterDto.fromPhoneDtoToPhone(phoneDto);
+    public void updatePhone(Phone phone) {
+        deleteFIle(phone.getId());
+        String filename = fileManager.addFile(phone);
+        phone.setFilename(filename);
 
         if (phone.getAvailable() > 0)
         {

@@ -1,3 +1,4 @@
+/*
 package com.app.model.dto;
 
 import lombok.*;
@@ -54,3 +55,4 @@ public class PhoneDto {
     private String filename;
 
 }
+*/

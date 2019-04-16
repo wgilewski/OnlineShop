@@ -1,7 +1,7 @@
 package com.app.controllers;
 
 
-import com.app.model.dto.PhoneDto;
+import com.app.model.phone.Phone;
 import com.app.service.PhoneService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +31,7 @@ public class AdminController {
 
     @GetMapping("/newPhone")
     public String phoneInsertGet(Model model) {
-        model.addAttribute("phone", new PhoneDto());
+        model.addAttribute("phone", new Phone());
         model.addAttribute("errors", new HashMap<>());
         model.addAttribute("screenDiagonals", Arrays.asList("4 cale", "4.7 cala", "5 cali", "5.2 cala", "5.5 cala"));
         model.addAttribute("operatingSystems", Arrays.asList("Android", "Windows Phone", "Apple iOS"));
@@ -52,9 +52,9 @@ public class AdminController {
     }
 
     @PostMapping("/newPhone")
-    public String phoneInsertPost(@Valid @ModelAttribute PhoneDto phoneDto, BindingResult bindingResult, Model model) {
+    public String phoneInsertPost(@Valid @ModelAttribute Phone phone, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("phone", phoneDto);
+            model.addAttribute("phone", phone);
             model.addAttribute("errors", bindingResult
                     .getFieldErrors()
                     .stream()
@@ -79,7 +79,7 @@ public class AdminController {
             return "phones/newPhone";
         }
 
-        phoneService.addPhone(phoneDto);
+        phoneService.addPhone(phone);
         return "redirect:/admin/selectAll";
     }
 
@@ -91,7 +91,8 @@ public class AdminController {
     }
 
     @GetMapping("/details/{id}")
-    public String selectOnePhone(@PathVariable Long id, Model model) {
+    public String selectOnePhone(@PathVariable Long id, Model model)
+    {
         model.addAttribute("phone", phoneService.findOnePhone(id));
         return "phones/phoneDetails";
     }
@@ -118,7 +119,7 @@ public class AdminController {
     }
 
     @PostMapping("/phoneUpdate")
-    public String phoneUpdatePost(@Valid @ModelAttribute PhoneDto phoneDto, BindingResult bindingResult, Model model) {
+    public String phoneUpdatePost(@Valid @ModelAttribute Phone phone, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult
                     .getFieldErrors()
@@ -127,7 +128,7 @@ public class AdminController {
                             FieldError::getField,
                             FieldError::getDefaultMessage,
                             (m1, m2) -> m1 + ", " + m2)));
-            model.addAttribute("phone", phoneDto);
+            model.addAttribute("phone", phone);
             model.addAttribute("screenDiagonals", Arrays.asList("4 cale", "4.7 cala", "5 cali", "5.2 cala", "5.5 cala"));
             model.addAttribute("operatingSystems", Arrays.asList("Android", "Windows Phone", "Apple iOS"));
             model.addAttribute("cameraResolutions", Arrays.asList("5 Mpix", "8 Mpix", "12 Mpix", "13 Mpix", "16 Mpix"));
@@ -143,7 +144,7 @@ public class AdminController {
             model.addAttribute("usbb", Arrays.asList("true", "false"));
             return "phones/phoneUpdate";
         }
-        phoneService.updatePhone(phoneDto);
+        phoneService.updatePhone(phone);
         return "redirect:/admin/selectAll";
     }
 

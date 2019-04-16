@@ -46,11 +46,13 @@
                         <label class="h2 text-black" for="password">Hasło</label>
                         <input id="password" type="password" class="form-control" th:field="*{password}" required=""/>
                     </div>
+                    <p class="text-danger" th:if="${errors.containsKey('password')}" th:text="${errors.get('password')}"></p>
                     <div class="form-group">
                         <label class="h2 text-black" for="passwordConfirmation">Powtórz hasło</label>
                         <input id="passwordConfirmation" type="password" class="form-control"
-                               th:field="*{passwordConfirmation}" required=""/>
+                        th:field="*{passwordConfirmation}" required=""/>
                     </div>
+                    <p class="text-danger" th:if="${errors.containsKey('passwordConfirmation')}" th:text="${errors.get('passwordConfirmation')}"></p>
                     <br/>
                     <div align="center">
                         <input class="btn btn-outline-success" type="submit" value="Rejestracja"/>

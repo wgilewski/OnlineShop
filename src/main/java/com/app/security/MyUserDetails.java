@@ -29,7 +29,7 @@ public class MyUserDetails implements UserDetailsService {
         User user = userRepository.findByUsername(username);
 
         if (user == null) {
-            throw new UsernameNotFoundException("THERE IS NO SUCH user : " + username + " IN DATABASE");
+            throw new UsernameNotFoundException("NIE MA TAKIEGO USERA : " + username + " W BAZIE");
         }
 
         return new org.springframework.security.core.userdetails.User(

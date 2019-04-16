@@ -44,6 +44,19 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public void createVerificationToken(User user, String token) {
+        verificationTokenRepository.save(VerificationToken
+                .builder()
+                .token(token)
+                .user(user)
+                .expirationDateTime(LocalDateTime.now().plusMinutes(5))
+                .build());
+    }
+
+    public VerificationToken getVerificationToken(String token) {
+        return verificationTokenRepository.findByToken(token);
+    }
+
     public void registerNewUserAccount(UserDto userDto, HttpServletRequest request) {
         if (userRepository.findByUsername(userDto.getUsername()) != null || userRepository.findByEmail(userDto.getEmail()) != null) {
             throw new RegistrationException("UZYTKOWNIK O PODANYM EMAILU LUB NAZWIE UZYTKOWNIAK JUZ ISTNIEJE", LocalDateTime.now());
@@ -69,27 +82,16 @@ public class UserService {
         userRepository.save(user);
     }
 
-
     public void saveRegisteredUser(User user) {
         userRepository.save(user);
     }
+
+
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public void createVerificationToken(User user, String token) {
-        verificationTokenRepository.save(VerificationToken
-                .builder()
-                .token(token)
-                .user(user)
-                .expirationDateTime(LocalDateTime.now().plusMinutes(1))
-                .build());
-    }
-
-    public VerificationToken getVerificationToken(String token) {
-        return verificationTokenRepository.findByToken(token);
-    }
 
     public Long getLoggedUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
