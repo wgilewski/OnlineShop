@@ -15,12 +15,7 @@ public class OnlineShopApplication {
 
 
     public static void main(String[] args) {
-        try {
-
             SpringApplication.run(OnlineShopApplication.class, args);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
 
